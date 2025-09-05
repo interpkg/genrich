@@ -47,7 +47,6 @@ RunPathwayGroup <- function(
                         data=df, 
                         fun='enricher', 
                         TERM2GENE=g_msigdb,
-                        readable = T, 
                         pvalueCutoff = 0.01, 
                         minGSSize = 5, 
                         maxGSSize = 500)
@@ -75,10 +74,8 @@ RunPathwayGroup <- function(
     p <- enrichplot::emapplot(filter(d_emap, pvalue < 0.05 & Count > 1), size_category=size_category, pie='Count')
     p <- p + scale_fill_manual(values=colors) 
 
-
-    pdf(paste0(outdir, "/ora.", prefix, ".pdf"), width = 8, height = 5, useDingbats=FALSE)
-    print(p)
-    dev.off()
+    ggplot2::ggsave(paste0(outdir, "/ora.", prefix, ".pdf"), width = 8, height = 5, useDingbats=FALSE)
+    
 }
 
 
