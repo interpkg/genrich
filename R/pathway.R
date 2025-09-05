@@ -66,7 +66,7 @@ RunPathwayGroup <- function(
     # 2.plot
     d_emap <- enrichplot::pairwise_termsim(go_enrich)
     # 2025-08 version paramater changed
-    p <- enrichplot::emapplot(filter(d_emap, pvalue < 0.05 & Count > 1), cex_category=.8, pie='Count')
+    p <- enrichplot::emapplot(filter(d_emap, pvalue < 0.05 & Count > 1), size_category=.8, pie='Count')
     p <- p + scale_fill_manual(values=c('0'='#FFA500', '1'='#4B0082', '2'='#20B2AA'))
 
 
