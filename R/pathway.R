@@ -18,6 +18,7 @@ RunPathwayGroup <- function(
     max_n=500,
     colors=c('0'='#FFA500', '1'='#4B0082', '2'='#20B2AA'),
     prefix='pathway_group',
+    fontsize=.5,
     w=8,
     h=5,
     outdir='.'
@@ -71,7 +72,7 @@ RunPathwayGroup <- function(
     saveRDS(d_emap, paste0(outdir, "/go_enrich.d_emap.rds"))
 
     # 2025-08 version paramater changed
-    p <- enrichplot::emapplot(filter(d_emap, pvalue < 0.05 & Count > 1), size_category=.8, pie='Count')
+    p <- enrichplot::emapplot(filter(d_emap, pvalue < 0.05 & Count > 1), size_category=fontsize, pie='Count')
     p <- p + scale_fill_manual(values=colors)
 
 
