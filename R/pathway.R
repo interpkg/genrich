@@ -57,13 +57,16 @@ RunPathwayGroup <- function(
     go_enrich@compareClusterResult$Description <- firstup(go_enrich@compareClusterResult$Description)
     go_enrich@compareClusterResult$p.adjust <- signif(go_enrich@compareClusterResult$p.adjust, digits=3)
     
+    saveRDS(go_enrich, paste0(outdir, "/go_enrich.rds"))
+
     # 1.output non-redundancy sig. results
     # ONTOLOGY ID Description GeneRatio BgRatio pvalue p.adjust qvalue geneID Count
     write.table(go_enrich@compareClusterResult, file=paste0(outdir, "/ora.", prefix, ".xls"), sep = "\t", row.names = F, quote = F)
 
     # 2.plot
     d_emap <- enrichplot::pairwise_termsim(go_enrich)
-    p <- enrichplot::emapplot(filter(d_emap, pvalue < 0.05 & Count > 1), cex.params = list(category_label=.8), pie.params=list(pie='Count'))
+    # 2025-08 version paramater changed
+    p <- enrichplot::emapplot(filter(d_emap, pvalue < 0.05 & Count > 1), cex_category=.8, pie='Count')
     p <- p + scale_fill_manual(values=c('0'='#FFA500', '1'='#4B0082', '2'='#20B2AA'))
 
 
