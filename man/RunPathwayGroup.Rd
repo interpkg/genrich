@@ -13,7 +13,11 @@ RunPathwayGroup(
   ont = "ALL",
   min_n = 3,
   max_n = 500,
+  colors = c(`0` = "#FFA500", `1` = "#4B0082", `2` = "#20B2AA"),
   prefix = "pathway_group",
+  size_category = 1,
+  w = 8,
+  h = 5,
   outdir = "."
 )
 }
