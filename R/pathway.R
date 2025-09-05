@@ -68,6 +68,8 @@ RunPathwayGroup <- function(
 
     # 2.plot
     d_emap <- enrichplot::pairwise_termsim(go_enrich)
+    saveRDS(d_emap, paste0(outdir, "/go_enrich.d_emap.rds"))
+
     # 2025-08 version paramater changed
     p <- enrichplot::emapplot(filter(d_emap, pvalue < 0.05 & Count > 1), size_category=.8, pie='Count')
     p <- p + scale_fill_manual(values=colors)
