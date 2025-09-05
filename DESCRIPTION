@@ -1,0 +1,11 @@
+Package: genrich
+Title: Calculate gene enrichment functions
+Version: 1.0
+Author: Hua Sun [aut,cre]
+Maintainer: Hua Sun <hua.sun229@gmail.com>
+Description: This package for calculate gene enrichment R functions.
+License: MIT + file LICENSE
+Encoding: UTF-8
+Depends: R (>= 4.2.1)
+RoxygenNote: 7.3.2
+
