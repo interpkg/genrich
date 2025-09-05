@@ -16,7 +16,10 @@ RunPathwayGroup <- function(
     ont='ALL',
     min_n=3,
     max_n=500,
+    colors=c('0'='#FFA500', '1'='#4B0082', '2'='#20B2AA'),
     prefix='pathway_group',
+    w=8,
+    h=5,
     outdir='.'
 ){
     
@@ -67,7 +70,7 @@ RunPathwayGroup <- function(
     d_emap <- enrichplot::pairwise_termsim(go_enrich)
     # 2025-08 version paramater changed
     p <- enrichplot::emapplot(filter(d_emap, pvalue < 0.05 & Count > 1), size_category=.8, pie='Count')
-    p <- p + scale_fill_manual(values=c('0'='#FFA500', '1'='#4B0082', '2'='#20B2AA'))
+    p <- p + scale_fill_manual(values=colors)
 
 
     pdf(paste0(outdir, "/ora.", prefix, ".pdf"), width = 8, height = 5, useDingbats=FALSE)
