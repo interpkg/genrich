@@ -35,7 +35,7 @@ RunPathwayGroup <- function(
                         keyType = 'SYMBOL', 
                         ont = ont, 
                         readable = T, 
-                        pvalueCutoff = 0.01, 
+                        pvalueCutoff = 0.05, 
                         minGSSize = 5, 
                         maxGSSize = 500)
     }
@@ -47,7 +47,7 @@ RunPathwayGroup <- function(
                         data=df, 
                         fun='enricher', 
                         TERM2GENE=g_msigdb,
-                        pvalueCutoff = 0.01, 
+                        pvalueCutoff = 0.05, 
                         minGSSize = 5, 
                         maxGSSize = 500)
     }
@@ -81,6 +81,43 @@ RunPathwayGroup <- function(
 
 
 
+
+
+#' Calculate gene enrichment by ORA method
+#'
+#' @param genes gene list
+#' @param org_db org db
+#' @return enrich object
+#' @export
+#'
+RunEnrichGO <- function(
+    genes=NULL, 
+    org_db='org.Hs.eg.db',
+    ont = "BP",
+    min_n=3,
+    max_n=500,
+    outdir='.'
+){
+
+    go_enrich <- clusterProfiler::enrichGO(
+                    gene = unique(genes),
+                    OrgDb = org_db, 
+                    keyType = 'SYMBOL',
+                    ont = ont,
+                    minGSSize = 5,
+                    maxGSSize = 500,
+                    pvalueCutoff = 0.05, 
+                    qvalueCutoff = 0.1)
+
+    saveRDS(go_enrich, paste0(outdir, '/ora.ego.rds'))
+    # output all results
+    write.table(go_enrich@result, file=paste0(outdir, '/ora.ego.all.xls'), sep = "\t", row.names = F, quote = F)
+
+    non_redundancy_go <- simplify(go_enrich, cutoff = 0.7, by = "p.adjust", select_fun = min)
+    # output non-redundancy sig. results
+    write.table(non_redundancy_go@result, file=paste0(outdir, '/ora.ego.non_redundancy.sig.xls'), sep = "\t", row.names = F, quote = F)
+    
+}
 
 
 
